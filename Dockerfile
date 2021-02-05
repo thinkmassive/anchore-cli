@@ -80,6 +80,11 @@ RUN set -ex && \
     pip3 install --no-index --find-links=./ /build_output/wheels/*.whl && \
     rm -rf /build_output /root/.cache
 
+# Install jq and diffutils for overriding allowlist
+RUN set -ex && \
+    echo "install utilties for overriding an allowlist" && \
+    yum install -y jq diffutils
+
 USER anchore:anchore
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
